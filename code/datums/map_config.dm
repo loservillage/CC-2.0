@@ -5,7 +5,7 @@
 
 /datum/map_config
 	// Metadata
-	var/config_filename = "_maps/dun_manor.json"
+	var/config_filename = "_maps/dun_world.json"
 	var/defaulted = TRUE  // set to FALSE by LoadConfig() succeeding
 	// Config from maps.txt
 	var/config_max_users = 0
@@ -15,8 +15,8 @@
 
 	// Config actually from the JSON - should default to Dun Manor
 	var/map_name = "Dun Manor"
-	var/map_path = "map_files/dun_manor"
-	var/map_file = "dun_manor.dmm"
+	var/map_path = "map_files/dun_world"
+	var/map_file = "dun_world.dmm"
 
 	var/traits = null
 	var/space_ruin_levels = 7
@@ -75,7 +75,7 @@
 	map_path = json["map_path"]
 
 	map_file = json["map_file"]
-	// "map_file": "dun_manor.dmm"
+	// "map_file": "dun_world.dmm"
 	if (istext(map_file))
 		if (!fexists("_maps/[map_path]/[map_file]"))
 			log_world("Map file ([map_path]/[map_file]) does not exist!")
