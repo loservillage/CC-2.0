@@ -20564,7 +20564,7 @@
 	endTurfY = 450
 	},
 /turf/closed/mineral/rogue/bedrock,
-/area/rogue/under/cavewet/bogcaves)
+/area/rogue/indoors)
 "gEn" = (
 /turf/open/floor/rogue/tile,
 /area/rogue/indoors)

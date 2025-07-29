@@ -266,6 +266,7 @@
 		var/mob/living/OW = owner
 		if(ML.client)
 			ML.stop_sound_channel(CHANNEL_PREYLOOP) //Stop the internal loop, it'll restart if the isbelly check on next tick anyway
+			
 
 		if(CHECK_BITFIELD(ML.vore_flags,ABSORBED))
 			DISABLE_BITFIELD(ML.vore_flags,ABSORBED)
@@ -293,6 +294,7 @@
 		owner.visible_message("<font color='green'><b>[owner] has digested [M] from their [lowertext(name)]!</b></font>")
 	M.x = 1
 	M.y = 1
+	M.z = 1
 	M.alpha = 0
 
 
