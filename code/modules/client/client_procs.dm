@@ -1548,6 +1548,17 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		to_chat(src, announcement)
 
 /client/proc/show_character_previews(mutable_appearance/MA)
+	var/atom/movable/screen/char_preview/background = LAZYACCESS(char_render_holders, "bg")
+	if(background)
+		screen -= background
+		char_render_holders -= background
+		qdel(background)
+	background = new()
+	LAZYSET(char_render_holders, "bg", background)
+	screen += background
+	background.screen_loc = "character_preview_map:0,0 to 3,3"
+
+	// not cardinal anymore, makes taurs more clear
 	var/pos = 0
 	for(var/D in GLOB.cardinals)
 		pos++
@@ -1563,13 +1574,13 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		O.dir = D
 		switch(pos)
 			if(1)
-				O.screen_loc = "character_preview_map:1:2,2:-18"
+				O.screen_loc = "character_preview_map:2,2"
 			if(2)
-				O.screen_loc = "character_preview_map:0:2,2:-18"
+				O.screen_loc = "character_preview_map:1,2"
 			if(3)
-				O.screen_loc = "character_preview_map:1:2,0:10"
+				O.screen_loc = "character_preview_map:1,1"
 			if(4)
-				O.screen_loc = "character_preview_map:0:2,0:10"
+				O.screen_loc = "character_preview_map:2,1"
 
 /client/proc/clear_character_previews()
 	for(var/atom/movable/screen/S in char_render_holders)
