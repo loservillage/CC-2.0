@@ -69,6 +69,7 @@
 		/datum/customizer/organ/ears/goblin,
 		/datum/customizer/organ/horns/tusks,
 		/datum/customizer/organ/belly/human, // :thinking:
+		/datum/customizer/organ/butt/human,
 		)
 	languages = list(
 		/datum/language/common,

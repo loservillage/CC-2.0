@@ -73,6 +73,7 @@
 		/datum/customizer/organ/horns/anthro,
 		/datum/customizer/organ/frills/anthro,
 		/datum/customizer/organ/belly/animal,
+		/datum/customizer/organ/butt/human,
 		/datum/customizer/organ/wings/anthro,
 		/datum/customizer/organ/neck_feature/anthro,
 		/datum/customizer/organ/testicles/anthro,

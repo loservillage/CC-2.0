@@ -86,6 +86,7 @@
 		/datum/customizer/organ/horns/tusks,
 		/datum/customizer/organ/ears/halforc,
 		/datum/customizer/organ/belly/human,
+		/datum/customizer/organ/butt/human,
 		)
 	languages = list(
 		/datum/language/common,
