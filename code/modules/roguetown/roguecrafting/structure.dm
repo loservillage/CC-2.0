@@ -864,7 +864,7 @@
 /datum/crafting_recipe/roguetown/structure/respawn_portal
 	name = "reformation gate"
 	result = /obj/structure/respawn_portal
-	reqs = list(/obj/item/riddleofsteel = 1)
+	reqs = list(/obj/item/roguegem/blue = 1)
 	verbage_simple = "build"
 	verbage = "builds"
 	craftsound = null
