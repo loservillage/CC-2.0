@@ -382,9 +382,8 @@ Works together with spawning an observer, noted above.
 				return ..()
 			var/datum/antagonist/zombie/Z = mind.has_antag_datum(/datum/antagonist/zombie)
 			if(!Z.revived)
-				if(!(world.time % 5))
-					to_chat(src, span_warning("I'm preparing to walk again."))
-				return
+				mind.remove_antag_datum(/datum/antagonist/zombie)
+				return ..()
 	return ..()
 
 /mob/proc/scry_ghost()
@@ -409,7 +408,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "OOC"
 	set name = "Ghost"
 	set desc = ""
-	set hidden = 1
 	if(!usr.client.holder)
 		return
 	if(stat != DEAD)
@@ -421,6 +419,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(response != "Ghost")
 			return	//didn't want to ghost after-all
 		ghostize(0)						//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
+
+
+
+
+
 
 /mob/camera/verb/ghost()
 	set category = "OOC"

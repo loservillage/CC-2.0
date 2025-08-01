@@ -56,6 +56,7 @@
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/belly/human,
+		/datum/customizer/organ/butt/human,
 		/datum/customizer/organ/vagina/human_anthro,
 		/datum/customizer/organ/wings/anthro,
 		/datum/customizer/organ/ears/elf

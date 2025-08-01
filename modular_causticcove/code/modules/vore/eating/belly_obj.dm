@@ -252,6 +252,8 @@
 
 	return count
 
+
+
 //Silent release for post digestion reforming
 /obj/belly/proc/release_specific_contents_digest(var/atom/movable/M, var/silent = FALSE)
 	if (!(M in contents))
@@ -292,10 +294,8 @@
 					LAZYADD(hearing_mobs, H)
 					last_hearcheck = world.time
 		owner.visible_message("<font color='green'><b>[owner] has digested [M] from their [lowertext(name)]!</b></font>")
-	M.x = 1
-	M.y = 1
-	M.z = 1
-	M.alpha = 0
+
+
 
 
 
@@ -513,6 +513,10 @@
 
 	// Delete the digested mob
 	release_specific_contents_digest(M)
+	M.x = 1
+	M.y = 1
+	M.z = 1
+	M.alpha = 0
 
 	//Update owner
 	owner.updateVRPanel()
@@ -764,3 +768,6 @@
 		for(var/I in emote_lists[K])
 			dupe.emote_lists[K] += I
 	return dupe
+
+
+	
