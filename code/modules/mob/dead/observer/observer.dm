@@ -421,10 +421,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghostize(0)						//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 
 
-
-
-
-
 /mob/camera/verb/ghost()
 	set category = "OOC"
 	set name = "Ghost"
@@ -1183,3 +1179,4 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/mob/living/carbon/human/bigbad = mind.current
 	bigbad.revive(TRUE, TRUE)
 	bigbad.alpha = 255
+

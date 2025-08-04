@@ -86,6 +86,8 @@
 	if(mob)
 		mob.update_cone()
 
+
+
 /mob/living/update_cone()
 	for(var/hidden_hud in client.hidden_images)
 		client.images -= hidden_hud
@@ -122,6 +124,7 @@
 		IB.appearance_flags = RESET_TRANSFORM|KEEP_TOGETHER
 		client.hidden_images += IB
 		client.images += IB
+
 /*	if(hud_used && hud_used.fov_blocker)
 		fov_blocker
 
@@ -262,6 +265,7 @@
 		if(H.viewcone_override)
 			return hide_cone()
 	return show_cone()
+
 
 /mob/proc/update_fov_angles()
 	fovangle = initial(fovangle)

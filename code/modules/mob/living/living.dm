@@ -947,6 +947,7 @@
 			doing = 0
 		if(client)
 			update_vision_cone()
+			smallsizer()
 
 /mob/living/proc/makeTrail(turf/target_turf, turf/start, direction)
 	if(!has_gravity())
@@ -1633,6 +1634,20 @@
 			add_movespeed_modifier(MOVESPEED_ID_LIVING_LIMBLESS, update=TRUE, priority=100, override=TRUE, multiplicative_slowdown=limbless_slowdown, movetypes=GROUND)
 		else
 			remove_movespeed_modifier(MOVESPEED_ID_LIVING_LIMBLESS, update=TRUE)
+
+/mob/proc/smallsizer(mob/user = usr)
+	var/small
+	if(!user)
+		return
+	if(!small)
+		var/image/I = image(icon = user.icon, icon_state = user.icon_state, loc = user, layer = user.layer, pixel_x = user.pixel_x, pixel_y = user.pixel_y)
+		I.override = TRUE
+		I.overlays += user.overlays
+		user.add_alt_appearance(/datum/atom_hud/alternate_appearance/basic, "smallsprite_sizecode", I)
+		//small_icon = I
+
+	small = !small
+	return TRUE
 
 /mob/living/proc/fall(forced)
 	if(!(mobility_flags & MOBILITY_USE))
