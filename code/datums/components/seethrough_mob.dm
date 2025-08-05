@@ -31,7 +31,6 @@
 	antimagic_allowed = TRUE
 	recharge_time = 20 //2 seconds
 	ignore_cockblock = TRUE
-	var/extended = FALSE
 	var/small = FALSE
 
 /obj/effect/proc_holder/spell/self/sizecode_smallsprite/cast(mob/user = usr)
