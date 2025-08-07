@@ -340,22 +340,22 @@
 	var/atom/movable/screen/plane_master/game_world_fov_hidden/PM = locate(/atom/movable/screen/plane_master/game_world_fov_hidden) in client.screen
 	PM.backdrop(src)
 
-/mob/proc/smallize(mob/user = usr)
-	var/small
-	if(!user)
-		return
+///mob/proc/smallize(mob/user = usr)
+//	var/small
+//	if(!user)
+//		return
 
-	if(!small)
-		var/image/I = image(icon = user.icon, icon_state = user.icon_state, loc = user, layer = user.layer, pixel_x = user.pixel_x, pixel_y = user.pixel_y)
-		I.override = TRUE
-		I.overlays += user.overlays
-		user.add_alt_appearance(/datum/atom_hud/alternate_appearance/basic, "smallsprite_sizecode", I)
+//	if(!small)
+//		var/image/I = image(icon = user.icon, icon_state = user.icon_state, loc = user, layer = user.layer, pixel_x = user.pixel_x, pixel_y = user.pixel_y)
+//		I.override = TRUE
+//		I.overlays += user.overlays
+//		user.add_alt_appearance(/datum/atom_hud/alternate_appearance/basic, "smallsprite_sizecode", I)
 		//small_icon = I
-	else
-		user.remove_alt_appearance("smallsprite_sizecode")
+//	else
+//		user.remove_alt_appearance("smallsprite_sizecode")
 
-	small = !small
-	return TRUE
+//	small = !small
+//	return TRUE
 
 
 /atom/movable/screen/fov_blocker

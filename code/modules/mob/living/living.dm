@@ -947,7 +947,7 @@
 			doing = 0
 		if(client)
 			update_vision_cone()
-			smallsizer()
+			//smallsizer()
 
 /mob/living/proc/makeTrail(turf/target_turf, turf/start, direction)
 	if(!has_gravity())

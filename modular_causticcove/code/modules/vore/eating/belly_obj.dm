@@ -516,7 +516,7 @@
 	M.x = 1
 	M.y = 1
 	M.z = 1
-	M.alpha = 0
+	M.alpha = 0 
 
 	//Update owner
 	owner.updateVRPanel()

@@ -714,19 +714,19 @@
 			user.vore_attack(user, target, src) // User, Pulled, Predator target (which can be user, pulling, or src)
 			return TRUE
 		//If they dragged themselves and we're currently aggressively grabbing them try to piggyback (not on cmode)
-		if(user == target && can_piggyback(target))
-			if(cmode)
-				to_chat(target, span_warning("[src] won't let you on!"))
-				return FALSE
-			piggyback(target)
-			return TRUE
+	if(user == target && can_piggyback(target))
+		if(cmode)
+			to_chat(target, span_warning("[src] won't let you on!"))
+			return FALSE
+		piggyback(target)
+		return TRUE
 		//If you dragged them to you and you're aggressively grabbing try to carry them
-		else if(user != target && can_be_firemanned(target))
-			var/obj/G = get_active_held_item()
-			if(G)
-				if(istype(G, /obj/item/grabbing))
-					fireman_carry(target)
-					return TRUE
+	else if(user != target && can_be_firemanned(target))
+		var/obj/G = get_active_held_item()
+		if(G)
+			if(istype(G, /obj/item/grabbing))
+				fireman_carry(target)
+				return TRUE
 	. = ..()
 
 //src is the user that will be carrying, target is the mob to be carried
