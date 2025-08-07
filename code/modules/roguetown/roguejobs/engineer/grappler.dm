@@ -270,6 +270,8 @@ Reel teleports the attached atom to the grabbed turf.
 				var/mob/living/carbon/human/H = target
 				if(HAS_TRAIT(H, TRAIT_BIGGUY))	//Too fat.
 					safe_to_teleport = FALSE
+				if(HAS_TRAIT(H, TRAIT_MACRO))
+					safe_to_teleport = FALSE
 			if(safe_to_teleport)
 				to_chat(user, span_info("I begin to attach the hook..."))
 				if(do_after(user, 30))

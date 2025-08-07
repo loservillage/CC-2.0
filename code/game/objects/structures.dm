@@ -32,6 +32,7 @@
 			var/mob/living/carbon/human/H = AM
 			if(H.dir == get_dir(H,src) && H.m_intent == MOVE_INTENT_RUN && (H.mobility_flags & MOBILITY_STAND))
 				var/is_bigguy = FALSE
+				var/is_macro = FALSE
 				if(HAS_TRAIT(H,TRAIT_BIGGUY))
 					if(istype(src,/obj/structure/mineral_door))
 						var/obj/structure/mineral_door/S = src
@@ -41,20 +42,23 @@
 					if(max_integrity > 1000) 	//Custom-set HP door, should be respected
 						take_damage(max_integrity / 6 + 1)
 					else
-						if(H.STASTR >= 13)	//STR adding role w/ Giant or half-orc, seems fair
-							take_damage((max_integrity / 3) * 2 + 1)
-						else 
-							take_damage(max_integrity / 3 + 1)
+						if(HAS_TRAIT(H,TRAIT_MACRO))
+							take_damage(max_integrity / 2 + 1)
+						else
+							if(H.STASTR >= 13)	//STR adding role w/ Giant or half-orc, seems fair
+								take_damage((max_integrity / 3) * 2 + 1)
+							else 
+								take_damage(max_integrity / 3 + 1)
 					H.Immobilize(20)
 					//MESSES you up
-					H.apply_damage(200, BRUTE, "chest", H.run_armor_check("chest", "blunt", damage = 200))
+					H.apply_damage(30, BRUTE, "chest", H.run_armor_check("chest", "blunt", damage = 100))
 					audible_message(span_warning("\The [src] shakes under the force of a great impact!"))
 					playsound(src, "meteor", 100, TRUE)
 					addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, Knockdown), 10), 10)
 				else if(is_bigguy && obj_integrity <= max_integrity / 3)	//This charge will wreck it
 					take_damage(max_integrity)
 					H.Immobilize(5)
-					H.apply_damage(80, BRUTE, "chest", H.run_armor_check("chest", "blunt", damage = 80))
+					H.apply_damage(20, BRUTE, "chest", H.run_armor_check("chest", "blunt", damage = 40))
 				else	//Normal charge
 					H.Immobilize(10)
 					H.apply_damage(15, BRUTE, "head", H.run_armor_check("head", "blunt", damage = 15))
