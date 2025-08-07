@@ -8,3 +8,19 @@
 	recipient.transform = recipient.transform.Scale(1.25, 1.25)
 	recipient.transform = recipient.transform.Translate(0, (0.25 * 16))
 	recipient.update_transform()
+
+/datum/virtue/size/macro
+	name =  "Macro"
+	desc = "Somehow, due to a freak accident or magical energies, my form is absolutely colossal. My strength and body are second to none. However, the ground beneath shifts, causing my speed to suffer greatly."
+	added_traits = list(TRAIT_MACRO)
+	custom_text = "Greatly increases your sprite size. Makes you very strong and durable but reduces your speed close to, if not to the minimum."
+
+/datum/virtue/size/macro/apply_to_human(mob/living/carbon/human/recipient)
+	recipient.transform = recipient.transform.Scale(2.25, 2.25)
+	recipient.transform = recipient.transform.Translate(0, (0.25 * 35))
+	recipient.update_transform()
+	recipient.change_stat("strength", 6)
+	recipient.change_stat("endurance", 6)
+	recipient.change_stat("constitution", 6)
+	recipient.change_stat("speed", -14)
+	

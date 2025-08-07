@@ -82,9 +82,12 @@
 			hud_used.fov_blocker.dir = src.dir
 		START_PROCESSING(SSincone, client)
 
-/client/proc/update_cone()
+/client/proc/update_cone() //This is where the sprite decides to return to the same size, some utter bullshit
 	if(mob)
+		var/mob/user = usr
 		mob.update_cone()
+
+
 
 /mob/living/update_cone()
 	for(var/hidden_hud in client.hidden_images)
@@ -122,6 +125,9 @@
 		IB.appearance_flags = RESET_TRANSFORM|KEEP_TOGETHER
 		client.hidden_images += IB
 		client.images += IB
+
+
+
 /*	if(hud_used && hud_used.fov_blocker)
 		fov_blocker
 
@@ -263,6 +269,7 @@
 			return hide_cone()
 	return show_cone()
 
+
 /mob/proc/update_fov_angles()
 	fovangle = initial(fovangle)
 	if(ishuman(src) && fovangle)
@@ -333,6 +340,24 @@
 	var/atom/movable/screen/plane_master/game_world_fov_hidden/PM = locate(/atom/movable/screen/plane_master/game_world_fov_hidden) in client.screen
 	PM.backdrop(src)
 
+/mob/proc/smallize(mob/user = usr)
+	var/small
+	if(!user)
+		return
+
+	if(!small)
+		var/image/I = image(icon = user.icon, icon_state = user.icon_state, loc = user, layer = user.layer, pixel_x = user.pixel_x, pixel_y = user.pixel_y)
+		I.override = TRUE
+		I.overlays += user.overlays
+		user.add_alt_appearance(/datum/atom_hud/alternate_appearance/basic, "smallsprite_sizecode", I)
+		//small_icon = I
+	else
+		user.remove_alt_appearance("smallsprite_sizecode")
+
+	small = !small
+	return TRUE
+
+
 /atom/movable/screen/fov_blocker
 	icon = 'icons/mob/vision_cone.dmi'
 	icon_state = "combat_v"
@@ -348,3 +373,4 @@
 	mouse_opacity = 0
 	layer = HUD_LAYER
 	plane = HUD_PLANE-2
+

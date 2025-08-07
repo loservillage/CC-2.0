@@ -11,6 +11,7 @@
 	can_buckle = TRUE
 	buckle_lying = FALSE
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
+	var/small = FALSE
 
 	ambushable = 1
 
@@ -134,3 +135,4 @@
 
 	/// Whether our FOV cone is overridden to be hidden. Simple bool.
 	var/viewcone_override
+

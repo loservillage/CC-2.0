@@ -580,6 +580,7 @@
 #include "code\datums\components\riding.dm"
 #include "code\datums\components\rotation.dm"
 #include "code\datums\components\rotting.dm"
+#include "code\datums\components\seethrough_mob.dm"
 #include "code\datums\components\shrapnel.dm"
 #include "code\datums\components\shrink.dm"
 #include "code\datums\components\sizzle.dm"
