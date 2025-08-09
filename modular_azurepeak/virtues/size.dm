@@ -24,3 +24,20 @@
 	recipient.change_stat("constitution", 6)
 	recipient.change_stat("speed", -14)
 	
+/datum/virtue/size/micro
+	name = "Micro"
+	desc ="Somehow, due to a freak accident or magical energies, my form is absolutely tiny. My strength and body are lacking. However, my dimutive size allows me to dodge blows that would otherwise hit others."
+	added_traits = list(TRAIT_MICRO)
+	custom_text = "Greatly reduces your sprite size. Makes you very agile, but slow. In addition, your stealth will be strengthened greatly. Your strength and durability will be close to, if not the minimum however."
+
+/datum/virtue/size/micro/apply_to_human(mob/living/carbon/human/recipient)
+	recipient.transform = recipient.transform.Scale(0.2, 0.2)
+	recipient.transform = recipient.transform.Translate(0, (0.25 * 8))
+	recipient.update_transform()
+	recipient.change_stat("strength", -10)
+	recipient.change_stat("endurance", -4)
+	recipient.change_stat("constitution", -10)
+	recipient.change_stat("speed", -14)
+	recipient.pass_flags = PASSMOB
+	recipient.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
+	recipient.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)

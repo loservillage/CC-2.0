@@ -234,6 +234,8 @@
 		else
 			BB.damage = BB.damage
 		BB.damage *= damfactor * (user.STAPER > 10 ? user.STAPER / 10 : 1)
+		if(HAS_TRAIT(user, TRAIT_MICRO))
+			BB.damage = (BB.damage * 0.3)
 	if(user.has_status_effect(/datum/status_effect/buff/clash) && ishuman(user))
 		var/mob/living/carbon/human/H = user
 		H.bad_guard(span_warning("I can't focus on my Guard and loose arrows! This drains me!"), cheesy = TRUE)
