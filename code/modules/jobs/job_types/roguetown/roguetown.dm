@@ -76,8 +76,6 @@
 					H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 				if(H.dna.species.name in list("Metal Construct"))
 					H.adjust_skillrank(/datum/skill/craft/engineering, 2, TRUE)
-				if(H.dna.species.name in list("Half-Giant"))
-					H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/sizecode_smallsprite)
 	H.update_body()
 
 /datum/outfit/job/roguetown/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)

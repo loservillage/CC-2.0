@@ -235,6 +235,108 @@
 				if(istype(T,/obj/item/reagent_containers/food) || istype(T,/obj/item/organ))
 					digest_item(T)
 
+		if(DM_MANABURN)
+			if(HAS_TRAIT(owner, TRAIT_PACIFISM)) //obvious.
+				digest_mode = DM_NOISY
+				return
+
+			for (var/mob/living/M in contents)
+				if(prob(25))
+					if(M && M.client && M.client.prefs.cit_toggles & DIGESTION_NOISES)
+						SEND_SOUND(M,prey_digest)
+					play_sound = pick(pred_digest)
+
+				//Pref protection!
+				if (!CHECK_BITFIELD(M.vore_flags, DIGESTABLE) || M.vore_flags & ABSORBED)
+					continue
+
+				//Person just died in guts!
+				if(M.stat == DEAD)
+					var/digest_alert_owner = pick(digest_messages_owner)
+					var/digest_alert_prey = pick(digest_messages_prey)
+
+					//Replace placeholder vars
+					digest_alert_owner = replacetext(digest_alert_owner,"%pred",owner)
+					digest_alert_owner = replacetext(digest_alert_owner,"%prey",M)
+					digest_alert_owner = replacetext(digest_alert_owner,"%belly",lowertext(name))
+
+					digest_alert_prey = replacetext(digest_alert_prey,"%pred",owner)
+					digest_alert_prey = replacetext(digest_alert_prey,"%prey",M)
+					digest_alert_prey = replacetext(digest_alert_prey,"%belly",lowertext(name))
+
+					//Send messages
+					to_chat(owner, "<span class='warning'>[digest_alert_owner]</span>")
+					to_chat(M, "<span class='warning'>[digest_alert_prey]</span>")
+					M.visible_message("<span class='notice'>You watch as [owner]'s form loses its additions.</span>")
+
+					owner.energy_add(50) // so eating dead mobs gives you miniscule mana
+					play_sound = pick(pred_death)
+					if(M && M.client && M.client.prefs.cit_toggles & DIGESTION_NOISES)
+						SEND_SOUND(M,prey_death)
+					M.stop_sound_channel(CHANNEL_PREYLOOP)
+					digestion_death(M)
+					owner.update_icons()
+					to_update = TRUE
+					continue
+
+
+				// Deal digestion damage (and charges mana)
+				if(!(M.status_flags & GODMODE))
+					M.adjustFireLoss(digest_burn)
+					M.adjustOxyLoss(10.0)
+					owner.energy_add(1)
+
+		if(DM_STRONGDIGEST)
+			if(HAS_TRAIT(owner, TRAIT_PACIFISM)) //obvious.
+				digest_mode = DM_NOISY
+				return
+
+			for (var/mob/living/M in contents)
+				if(prob(25))
+					if(M && M.client && M.client.prefs.cit_toggles & DIGESTION_NOISES)
+						SEND_SOUND(M,prey_digest)
+					play_sound = pick(pred_digest)
+
+				//Pref protection!
+				if (!CHECK_BITFIELD(M.vore_flags, DIGESTABLE) || M.vore_flags & ABSORBED)
+					continue
+
+				//Person just died in guts!
+				if(M.stat == DEAD)
+					var/digest_alert_owner = pick(digest_messages_owner)
+					var/digest_alert_prey = pick(digest_messages_prey)
+
+					//Replace placeholder vars
+					digest_alert_owner = replacetext(digest_alert_owner,"%pred",owner)
+					digest_alert_owner = replacetext(digest_alert_owner,"%prey",M)
+					digest_alert_owner = replacetext(digest_alert_owner,"%belly",lowertext(name))
+
+					digest_alert_prey = replacetext(digest_alert_prey,"%pred",owner)
+					digest_alert_prey = replacetext(digest_alert_prey,"%prey",M)
+					digest_alert_prey = replacetext(digest_alert_prey,"%belly",lowertext(name))
+
+					//Send messages
+					to_chat(owner, "<span class='warning'>[digest_alert_owner]</span>")
+					to_chat(M, "<span class='warning'>[digest_alert_prey]</span>")
+					M.visible_message("<span class='notice'>You watch as [owner]'s form loses its additions.</span>")
+
+					owner.adjust_nutrition(400) // so eating dead mobs gives you *something*.
+					play_sound = pick(pred_death)
+					if(M && M.client && M.client.prefs.cit_toggles & DIGESTION_NOISES)
+						SEND_SOUND(M,prey_death)
+					M.stop_sound_channel(CHANNEL_PREYLOOP)
+					digestion_death(M)
+					owner.update_icons()
+					to_update = TRUE
+					continue
+
+
+				// Deal digestion damage (and feed the pred), does MUCH more damage but takes away energy
+				if(!(M.status_flags & GODMODE))
+					M.energy_add(-20)
+					M.adjustFireLoss(digest_burn)
+					M.adjustOxyLoss(50.0)
+					owner.adjust_nutrition(10)
 	/////////////////////////// Make any noise ///////////////////////////
 	if(play_sound)
 		if((world.time + NORMIE_HEARCHECK) > last_hearcheck)
@@ -256,3 +358,4 @@
 			owner.updateVRPanel()
 
 	return SSBELLIES_PROCESSED
+

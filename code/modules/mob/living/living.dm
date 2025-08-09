@@ -233,8 +233,18 @@
 					visible_message(span_warning("[src] smashes into [L] with no headstart!"), span_warning("I charge into [L] too early!"))
 				if(clash_blocked)
 					visible_message(span_warning("[src] gets tripped by [L]!"), span_warning("I get tripped by [L]!"))
+					if(voremode)
+						if(prob(50))
+							vore_attack_instant(src, L, src)
+						else
+							return TRUE
 			else
 				visible_message(span_warning("[src] charges into [L]!"), span_warning("I charge into [L]!"))
+				if(voremode)
+					if(prob(50))
+						vore_attack_instant(src, L, src)
+					else
+						return TRUE
 			return TRUE
 
 	//okay, so we didn't switch. but should we push?

@@ -6,6 +6,8 @@
 #define DM_DRAGON "Dragon"
 #define DM_ABSORB "Absorb"
 #define DM_UNABSORB "Un-absorb"
+#define DM_MANABURN "Mana-Burn"
+#define DM_STRONGDIGEST "Strong-Digest"
 
 #define DIGESTABLE 		(1<<0)
 #define SHOW_VORE_PREFS (1<<1)
