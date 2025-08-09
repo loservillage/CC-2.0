@@ -162,6 +162,120 @@
 		prey.log_message("[key_name(user)] forced [key_name(pred)] to eat [key_name(prey)].", LOG_ATTACK)
 	return TRUE
 
+//Instant Vore Stuff
+
+/mob/living/proc/vore_attack_instant(var/mob/living/user, var/mob/living/prey, var/mob/living/pred)
+	lazy_init_belly()
+	if(!user || !prey || !pred)
+		return
+
+	if(!isliving(pred)) //no badmin, you can't feed people to ghosts or objects.
+		return
+
+	if(pred == prey) //you click your target
+		if(!CHECK_BITFIELD(pred.vore_flags,FEEDING))
+			to_chat(user, "<span class='notice'>They aren't able to be fed.</span>")
+			to_chat(pred, "<span class='notice'>[user] tried to feed you themselves, but you aren't voracious enough to be fed.</span>")
+			return
+		feed_self_to_grabbed_instant(user, pred)
+
+	else if(pred == user) //you click yourself
+		feed_grabbed_to_self_instant(user, prey)
+
+	else // click someone other than you/prey
+		if(!CHECK_BITFIELD(pred.vore_flags,FEEDING))
+			to_chat(user, "<span class='notice'>They aren't voracious enough to be fed.</span>")
+			to_chat(pred, "<span class='notice'>[user] tried to feed you [prey], but you aren't voracious enough to be fed.</span>")
+			return
+		if(!CHECK_BITFIELD(prey.vore_flags,FEEDING))
+			to_chat(user, "<span class='notice'>They aren't able to be fed to someone.</span>")
+			to_chat(prey, "<span class='notice'>[user] tried to feed you to [pred], but you aren't able to be fed to them.</span>")
+			return
+		feed_grabbed_to_other_instant(user, prey, pred)
+
+/mob/living/proc/feed_grabbed_to_self_instant(var/mob/living/user, var/mob/living/prey)
+	user.lazy_init_belly()
+	var/belly = user.vore_selected
+	return perform_the_nom_fast(user, prey, user, belly)
+
+/mob/living/proc/feed_self_to_grabbed_instant(var/mob/living/user, var/mob/living/pred)
+	pred.lazy_init_belly()
+	var/belly = input("Choose Belly") in pred.vore_organs
+	return perform_the_nom_fast(user, user, pred, belly)
+
+/mob/living/proc/feed_grabbed_to_other_instant(var/mob/living/user, var/mob/living/prey, var/mob/living/pred)
+	pred.lazy_init_belly()
+	var/belly = input("Choose Belly") in pred.vore_organs
+	return perform_the_nom_fast(user, prey, pred, belly)
+
+
+/mob/living/proc/perform_the_nom_fast(var/mob/living/user, var/mob/living/prey, var/mob/living/pred, var/obj/belly/belly, var/delay)
+	//Sanity
+	if(!user || !prey || !pred || !istype(belly) || !(belly in pred.vore_organs))
+		testing("[user] attempted to feed [prey] to [pred], via [lowertext(belly.name)] but it went wrong.")
+		return
+
+	if (!CHECK_BITFIELD(prey.vore_flags, DEVOURABLE))
+		to_chat(user, "This can't be eaten!")
+		return FALSE
+
+	// The belly selected at the time of noms
+	var/attempt_msg = "ERROR: Vore message couldn't be created. Notify a dev. (at)"
+	var/success_msg = "ERROR: Vore message couldn't be created. Notify a dev. (sc)"
+
+	// Prepare messages
+	if(user == pred) //Feeding someone to yourself
+		success_msg = text("<span class='warning'>[] manages to [] [] into their []!</span>",pred,lowertext(belly.vore_verb),prey,lowertext(belly.name))
+	else //Feeding someone to another person
+		attempt_msg = text("<span class='warning'>[] is attempting to make [] [] [] into their []!</span>",user,pred,lowertext(belly.vore_verb),prey,lowertext(belly.name))
+		success_msg = text("<span class='warning'>[] manages to make [] [] [] into their []!</span>",user,pred,lowertext(belly.vore_verb),prey,lowertext(belly.name))
+
+	if(!prey.Adjacent(user)) // let's not even bother attempting it yet if they aren't next to us.
+		return FALSE
+
+	// Announce that we start the attempt!
+	user.visible_message(attempt_msg)
+
+	// Now give the prey time to escape... return if they did
+	var/swallow_time
+	if(delay)
+		swallow_time = 1
+
+	//Timer and progress bar
+	if(!do_after(user, swallow_time, TRUE, prey))
+		return FALSE // Prey escaped (or user disabled) before timer expired.
+
+	if(!prey.Adjacent(user)) //double check'd just in case they moved during the timer and the do_mob didn't fail for whatever reason
+		return FALSE
+
+	// If we got this far, nom successful! Announce it!
+	user.visible_message(success_msg)
+
+	// Actually shove prey into the belly.
+	belly.nom_mob(prey, user)
+	stop_pulling()
+
+	// Flavor handling
+	if(belly.can_taste && prey.get_taste_message(FALSE))
+		to_chat(belly.owner, "<span class='notice'>[prey] tastes of [prey.get_taste_message(FALSE)].</span>")
+
+	// Inform Admins
+	var/prey_braindead
+	var/prey_stat
+	if(prey.ckey)
+		prey_stat = prey.stat//only return this if they're not an unmonkey or whatever
+		if(!prey.client)//if they disconnected, tell us
+			prey_braindead = TRUE
+	if (pred == user)
+		message_admins("[ADMIN_LOOKUPFLW(pred)] ate [ADMIN_LOOKUPFLW(prey)][!prey_braindead ? "" : " (BRAINDEAD)"][prey_stat ? " (DEAD/UNCONSCIOUS)" : ""].")
+		pred.log_message("[key_name(pred)] ate [key_name(prey)].", LOG_ATTACK)
+		prey.log_message("[key_name(prey)] was eaten by [key_name(pred)].", LOG_ATTACK)
+	else
+		message_admins("[ADMIN_LOOKUPFLW(user)] forced [ADMIN_LOOKUPFLW(pred)] to eat [ADMIN_LOOKUPFLW(prey)].")
+		user.log_message("[key_name(user)] forced [key_name(pred)] to eat [key_name(prey)].", LOG_ATTACK)
+		pred.log_message("[key_name(user)] forced [key_name(pred)] to eat [key_name(prey)].", LOG_ATTACK)
+		prey.log_message("[key_name(user)] forced [key_name(pred)] to eat [key_name(prey)].", LOG_ATTACK)
+	return TRUE
 //
 //End vore code.
 
@@ -351,3 +465,5 @@
 			return TRUE
 
 	return FALSE
+
+//testing
