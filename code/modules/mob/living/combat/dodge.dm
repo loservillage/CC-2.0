@@ -161,7 +161,10 @@
 			var/sentinel = H.calculate_sentinel_bonus()
 			prob2defend += sentinel
 
-		prob2defend = clamp(prob2defend, 5, 90)
+		if(HAS_TRAIT(H, TRAIT_MICRO))
+			prob2defend = clamp(prob2defend, 90, 90)
+		else
+			prob2defend = clamp(prob2defend, 5, 90)
 
 		//------------Dual Wielding Checks------------
 		var/attacker_dualw
