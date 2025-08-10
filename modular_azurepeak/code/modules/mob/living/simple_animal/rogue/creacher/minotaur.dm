@@ -48,11 +48,11 @@
 	pooptype = null
 
 	deaggroprob = 0
-	defprob = 40
+	defprob = 20
 	retreat_health = 0
 	food = 0
 	attack_sound = list('sound/combat/wooshes/blunt/wooshhuge (1).ogg','sound/combat/wooshes/blunt/wooshhuge (2).ogg','sound/combat/wooshes/blunt/wooshhuge (3).ogg')
-	dodgetime = 0
+	dodgetime = 30
 	aggressive = 1
 
 //new ai, old ai off
@@ -167,9 +167,9 @@
 	animname = "blank22"
 	blade_class = BCLASS_CUT
 	hitsound = "smallslash"
-	chargetime = 0
+	chargetime = 10
 	penfactor = 5
-	swingdelay = 3
+	swingdelay = 4
 	candodge = TRUE
 	canparry = TRUE
 	item_d_type = "stab"
@@ -184,7 +184,7 @@
 	hitsound = "genchop"
 	chargetime = 10
 	penfactor = 10
-	swingdelay = 3
+	swingdelay = 5
 	candodge = TRUE
 	canparry = TRUE
 	reach = 2 
