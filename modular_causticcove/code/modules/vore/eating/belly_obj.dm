@@ -173,7 +173,6 @@
 	var/mob/living/L //for chat messages and blindness
 	if(isliving(thing))
 		L = thing
-		L.become_blind("belly_[REF(src)]")
 	if(OldLoc in contents)
 		return //Someone dropping something (or being stripdigested)
 
@@ -205,7 +204,6 @@
 	. = ..()
 	if(isliving(AM))
 		var/mob/living/L = AM
-		L.cure_blind("belly_[REF(src)]")
 
 // Release all contents of this belly into the owning mob's location.
 // If that location is another mob, contents are transferred into whichever of its bellies the owning mob is in.

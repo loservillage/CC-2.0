@@ -715,6 +715,9 @@
 			return TRUE
 		//If they dragged themselves and we're currently aggressively grabbing them try to piggyback (not on cmode)
 	if(user == target && can_piggyback(target))
+		if(HAS_TRAIT(src, TRAIT_MICRO))
+			to_chat(target, span_warning("[src] is too small!"))
+			return FALSE
 		if(cmode)
 			to_chat(target, span_warning("[src] won't let you on!"))
 			return FALSE
