@@ -16,12 +16,12 @@
 	custom_text = "Greatly increases your sprite size. Makes you very strong and durable but reduces your speed close to, if not to the minimum."
 
 /datum/virtue/size/macro/apply_to_human(mob/living/carbon/human/recipient)
-	recipient.transform = recipient.transform.Scale(2.25, 2.25)
+	recipient.transform = recipient.transform.Scale(2, 2)
 	recipient.transform = recipient.transform.Translate(0, (0.25 * 35))
 	recipient.update_transform()
-	recipient.change_stat("strength", 6)
-	recipient.change_stat("endurance", 6)
-	recipient.change_stat("constitution", 6)
+	recipient.change_stat("strength", 8)
+	recipient.change_stat("endurance", 8)
+	recipient.change_stat("constitution", 8)
 	recipient.change_stat("speed", -14)
 	
 /datum/virtue/size/micro
@@ -38,6 +38,6 @@
 	recipient.change_stat("endurance", -4)
 	recipient.change_stat("constitution", -10)
 	recipient.change_stat("speed", -14)
-	recipient.pass_flags = PASSMOB
+	recipient.pass_flags = PASSTABLE | PASSMOB
 	recipient.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
 	recipient.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
