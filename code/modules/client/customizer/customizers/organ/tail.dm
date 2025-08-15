@@ -151,6 +151,8 @@
 		/datum/sprite_accessory/tail/deer,
 		/datum/sprite_accessory/tail/raccoon,
 		/datum/sprite_accessory/tail/sabresune,
+		/datum/sprite_accessory/tail/tiefling,
+		/datum/sprite_accessory/tail/tiefling/heart,
 		/datum/sprite_accessory/tail/lizard/smooth,
 		/datum/sprite_accessory/tail/lizard/dtiger,
 		/datum/sprite_accessory/tail/lizard/ltiger,

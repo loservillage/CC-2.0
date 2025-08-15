@@ -66,7 +66,7 @@
 		OFFSET_FACE_F = list(0,-1), OFFSET_BELT_F = list(0,0), OFFSET_BACK_F = list(0,-1), \
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
-		OFFSET_TAUR = list(-16,0), OFFSET_TAUR_F = list(-16,0),\
+		OFFSET_TAUR = list(-16,0), OFFSET_TAUR_F = list(-16,0), \
 		)
 	race_bonus = list(STAT_PERCEPTION = 1, STAT_CONSTITUTION = 1)
 	enflamed_icon = "widefire"
