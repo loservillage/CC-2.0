@@ -22,6 +22,7 @@
 		/datum/sprite_accessory/tail_feature/spines/long,
 		/datum/sprite_accessory/tail_feature/spines/longmeme,
 		/datum/sprite_accessory/tail_feature/spines/aquatic,
+		/datum/sprite_accessory/tail_feature/large_snake/underbelly,
 		/datum/sprite_accessory/tail_feature/taur/lamia,
 		/datum/sprite_accessory/tail_feature/taur/horse,
 		/datum/sprite_accessory/tail_feature/taur/lizard,
