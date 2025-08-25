@@ -401,6 +401,18 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if (loadout_type3)
 		loadout3 = new loadout_type3()
 
+/datum/preferences/proc/_load_loadout4(S)
+	var/loadout_type4
+	S["loadout4"] >> loadout_type4
+	if (loadout_type4)
+		loadout4 = new loadout_type4()
+
+/datum/preferences/proc/_load_loadout5(S)
+	var/loadout_type5
+	S["loadout5"] >> loadout_type5
+	if (loadout_type5)
+		loadout5 = new loadout_type5()
+
 /datum/preferences/proc/_load_height(S)
 	var/preview_height
 	S["body_height"] >> preview_height
@@ -474,6 +486,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	_load_loadout(S)
 	_load_loadout2(S)
 	_load_loadout3(S)
+	_load_loadout4(S)
+	_load_loadout5(S)
 
 	if(!S["features["mcolor"]"] || S["features["mcolor"]"] == "#000")
 		WRITE_FILE(S["features["mcolor"]"]	, "#FFF")
@@ -714,6 +728,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		WRITE_FILE(S["loadout3"] , loadout3.type)
 	else
 		WRITE_FILE(S["loadout3"] , null)
+	if(loadout4)
+		WRITE_FILE(S["loadout4"] , loadout4.type)
+	else
+		WRITE_FILE(S["loadout4"] , null)
+	if(loadout5)
+		WRITE_FILE(S["loadout5"] , loadout5.type)
+	else
+		WRITE_FILE(S["loadout5"] , null)
 
 	save_vore_prefs(S)
 

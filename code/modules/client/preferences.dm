@@ -172,6 +172,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/datum/loadout_item/loadout
 	var/datum/loadout_item/loadout2
 	var/datum/loadout_item/loadout3
+	var/datum/loadout_item/loadout4
+	var/datum/loadout_item/loadout5
 
 	var/flavortext
 	var/flavortext_display
@@ -470,6 +472,10 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<br><b>Loadout Item II:</b> <a href='?_src_=prefs;preference=loadout_item2;task=input'>[loadout2 ? loadout2.name : "None"]</a>"
 
 			dat += "<br><b>Loadout Item III:</b> <a href='?_src_=prefs;preference=loadout_item3;task=input'>[loadout3 ? loadout3.name : "None"]</a>"
+
+			dat += "<br><b>Loadout Item IV:</b> <a href='?_src_=prefs;preference=loadout_item4;task=input'>[loadout4 ? loadout4.name : "None"]</a>"
+
+			dat += "<br><b>Loadout Item V:</b> <a href='?_src_=prefs;preference=loadout_item5;task=input'>[loadout5 ? loadout5.name : "None"]</a>"
 			dat += "</td>"
 
 			dat += "</tr></table>"
@@ -1854,6 +1860,48 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							to_chat(user, "<font color='yellow'><b>[loadout3.name]</b></font>")
 							if(loadout3.desc)
 								to_chat(user, "[loadout3.desc]")
+				if("loadout_item4")
+					var/list/loadouts_available = list("None")
+					for (var/path as anything in GLOB.loadout_items)
+						var/datum/loadout_item/loadout4 = GLOB.loadout_items[path]
+						var/donoritem = loadout4.donoritem
+						if(donoritem && !loadout4.donator_ckey_check(user.ckey))
+							continue
+						if (!loadout4.name)
+							continue
+						loadouts_available[loadout4.name] = loadout4
+
+					var/loadout_input4 = input(user, "Choose your character's loadout item. RMB a tree, statue or clock to collect. I cannot stress this enough. YOU DON'T SPAWN WITH THESE. YOU HAVE TO MANUALLY PICK THEM UP!!", "LOADOUT THAT YOU GET FROM A TREE OR STATUE OR CLOCK") as null|anything in loadouts_available
+					if(loadout_input4)
+						if(loadout_input4 == "None")
+							loadout4 = null
+							to_chat(user, "Who needs stuff anyway?")
+						else
+							loadout4 = loadouts_available[loadout_input4]
+							to_chat(user, "<font color='yellow'><b>[loadout4.name]</b></font>")
+							if(loadout4.desc)
+								to_chat(user, "[loadout4.desc]")
+				if("loadout_item5")
+					var/list/loadouts_available = list("None")
+					for (var/path as anything in GLOB.loadout_items)
+						var/datum/loadout_item/loadout5 = GLOB.loadout_items[path]
+						var/donoritem = loadout5.donoritem
+						if(donoritem && !loadout5.donator_ckey_check(user.ckey))
+							continue
+						if (!loadout5.name)
+							continue
+						loadouts_available[loadout5.name] = loadout5
+
+					var/loadout_input5 = input(user, "Choose your character's loadout item. RMB a tree, statue or clock to collect. I cannot stress this enough. YOU DON'T SPAWN WITH THESE. YOU HAVE TO MANUALLY PICK THEM UP!!", "LOADOUT THAT YOU GET FROM A TREE OR STATUE OR CLOCK") as null|anything in loadouts_available
+					if(loadout_input5)
+						if(loadout_input5 == "None")
+							loadout5 = null
+							to_chat(user, "Who needs stuff anyway?")
+						else
+							loadout5 = loadouts_available[loadout_input5]
+							to_chat(user, "<font color='yellow'><b>[loadout5.name]</b></font>")
+							if(loadout5.desc)
+								to_chat(user, "[loadout5.desc]")
 				if("species")
 					var/list/crap = list()
 					for(var/A in GLOB.roundstart_races)
