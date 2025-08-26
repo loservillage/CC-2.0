@@ -22,7 +22,6 @@
 	sewrepair = FALSE
 	max_integrity = 600
 	item_flags = DROPDEL
-	//var/active_item
 	var/next_regen
 	var/mob/living/carbon/human/skin_haver
 
