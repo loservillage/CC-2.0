@@ -24,6 +24,7 @@
 /datum/outfit/job/roguetown/guildmaster/pre_equip(mob/living/carbon/human/H)
 	ADD_TRAIT(H, TRAIT_SEEPRICES, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_TRAINED_SMITH, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_ARCYNE_T1, TRAIT_GENERIC)
 	head = /obj/item/clothing/head/roguetown/chaperon/noble/guildmaster
 	gloves = /obj/item/clothing/gloves/roguetown/angle/grenzelgloves/blacksmith
 	if(H.mind)
@@ -32,6 +33,7 @@
 		H.verbs += /mob/living/carbon/human/proc/guild_announcement
 		H.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
 		H.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
+		H.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 		H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 		H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 		H.adjust_skillrank(/datum/skill/labor/lumberjacking, 3, TRUE)
@@ -42,6 +44,7 @@
 		H.adjust_skillrank(/datum/skill/craft/blacksmithing, 5, TRUE)
 		H.adjust_skillrank(/datum/skill/craft/armorsmithing, 5, TRUE)
 		H.adjust_skillrank(/datum/skill/craft/weaponsmithing, 5, TRUE)
+		H.adjust_skillrank(/datum/skill/magic/arcane, 2, TRUE)
 		H.adjust_skillrank(/datum/skill/craft/smelting, 4, TRUE)
 		H.adjust_skillrank(/datum/skill/craft/engineering, 3, TRUE) // 2 Engineering, let them make more artificers stuffs
 		H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE) // Worse than the real tailor, so can't steal their job right away 
@@ -54,6 +57,7 @@
 			H.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
+			H.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/smelting, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE) // Worse than the real tailor, so can't steal their job right away 
 			H.adjust_skillrank(/datum/skill/craft/tanning, 1, TRUE)
@@ -66,15 +70,27 @@
 			/obj/item/rogueweapon/hammer/iron = 1,
 			/obj/item/rogueweapon/tongs = 1,
 			/obj/item/recipe_book/blacksmithing = 1,
+			/obj/item/recipe_book/engineering = 1,
+			/obj/item/recipe_book/ceramics = 1,
+			/obj/item/recipe_book/builder = 1,
+			/obj/item/recipe_book/survival = 1,
+			/obj/item/recipe_book/magic = 1,
+			/obj/item/chalk = 1,
 			)
 		belt = /obj/item/storage/belt/rogue/leather
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/rich
 		beltr = /obj/item/storage/keyring/guildmaster
 
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/touch/prestidigitation)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/enchant_weapon)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/conjure_weapon)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/conjure_armor)
+
 	H.change_stat("strength", 2)
 	H.change_stat("intelligence", 1)
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 2)
+	H.change_stat("perception", 2)
 
 GLOBAL_VAR_INIT(last_guildmaster_announcement, -50000) // Inits variable for later
 
