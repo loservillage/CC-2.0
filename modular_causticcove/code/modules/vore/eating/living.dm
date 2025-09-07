@@ -333,7 +333,9 @@
 		if(isanimal(B.owner))
 			var/mob/living/simple_animal/SA = B.owner
 			SA.update_icons()
-
+	else if(istype(loc,/obj/item/micro))
+		/obj/item/micro/mh = loc
+		mh.dump_mob()
 	else
 		to_chat(src,"<span class='alert'>You aren't inside anyone, though, is the thing.</span>")
 
