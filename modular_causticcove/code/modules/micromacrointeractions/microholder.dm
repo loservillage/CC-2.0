@@ -65,6 +65,10 @@
 	held.transform = null
 	held.transform *= 0.7
 
+/obj/item/micro/Exited(mob/held, atom/newLoc)
+	held_mob.transform = original_transform
+	held_mob.update_transform()
+	held_mob = null
 
 /obj/item/micro/MouseDrop(mob/living/M)
 	..()
