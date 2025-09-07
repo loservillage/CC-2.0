@@ -30,6 +30,7 @@
 		held_mob.update_transform()
 		held_mob.forceMove(get_turf(src))
 		held_mob = null
+		process()
 
 /obj/item/micro/process()
 	if(held_mob?.loc != src || isturf(loc))
@@ -53,22 +54,26 @@
 	else if(isitem(loc))
 		to_chat(held, span_warning("You struggle free of [loc]."))
 		forceMove(get_turf(src))
+	
+	process()
 
 /obj/item/micro/Entered(mob/held, atom/OldLoc)
 	. = ..()
-	held_mob = held
-	original_vis_flags = held.vis_flags
-	held.vis_flags = VIS_INHERIT_ID|VIS_INHERIT_LAYER|VIS_INHERIT_PLANE
-	vis_contents += held
-	name = held.name
-	original_transform = held.transform
-	held.transform = null
-	held.transform *= 0.7
+	if(ismob(held))
+		held_mob = held
+		original_vis_flags = held.vis_flags
+		held.vis_flags = VIS_INHERIT_ID|VIS_INHERIT_LAYER|VIS_INHERIT_PLANE
+		vis_contents += held
+		name = held.name
+		original_transform = held.transform
+		held.transform = null
+		held.transform *= 0.7
 
 /obj/item/micro/Exited(mob/held, atom/newLoc)
-	held_mob.transform = original_transform
-	held_mob.update_transform()
-	held_mob = null
+	if(held == held_mob)
+		held_mob.transform = original_transform
+		held_mob.update_transform()
+		held_mob = null
 
 /obj/item/micro/MouseDrop(mob/living/M)
 	..()
