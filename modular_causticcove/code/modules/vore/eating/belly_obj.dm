@@ -511,7 +511,7 @@
 
 	// Delete the digested mob
 	release_specific_contents_digest(M)
-	var/mob/dead/observer/G = M.ghostize(FALSE)
+	var/mob/dead/observer/G = M.ghostize(TRUE)
 	if(G)
 		G.forceMove(owner)
 	M.x = 1
