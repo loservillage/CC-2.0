@@ -1,5 +1,8 @@
 /mob/living/carbon/human/proc/can_be_picked_up(mob/living/carbon/human/other)
 	//TODO consentual before sensual
+	if(client)
+		if(!client.prefs.pickupable)
+			return FALSE
 	return TRUE
 
 /mob/living/carbon/human/proc/get_size()

@@ -51,7 +51,6 @@
 		to_chat(M, span_warning("\The [held] wriggles out of your grip!"))
 		to_chat(held, span_warning("You wiggle out of [M]'s grip!"))
 	else if(isitem(loc))
-		var/obj/item/I = loc
 		to_chat(held, span_warning("You struggle free of [loc]."))
 		forceMove(get_turf(src))
 
