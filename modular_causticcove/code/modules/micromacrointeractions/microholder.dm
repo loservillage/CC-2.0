@@ -48,9 +48,23 @@
 /obj/item/micro/container_resist(mob/living/held)
 	if(ismob(loc))
 		var/mob/M = loc
-		M.dropItemToGround(src)
-		to_chat(M, span_warning("\The [held] wriggles out of your grip!"))
-		to_chat(held, span_warning("You wiggle out of [M]'s grip!"))
+		var/wrestling_diff = 0
+		var/resist_chance = 55
+		var/combat_modifier = 0.45 // -30 and -25 from being in combat mode diff and aggro grab, apply those immidietly
+		if(held_mob.mind)
+			wrestling_diff += (held_mob.get_skill_level(/datum/skill/combat/wrestling)) //NPCs don't use this
+		if(M.mind)
+			wrestling_diff -= (M.get_skill_level(/datum/skill/combat/wrestling))
+		resist_chance += max((wrestling_diff * 10), -20)
+		resist_chance *= combat_modifier
+		resist_chance = clamp(resist_chance, 5, 95)
+		if(!prob(resist_chance))
+			to_chat(M, span_warning("[held] uselessly wiggles against my grip!"))
+			to_chat(held, span_warning("You struggle against [M]'s grip!"))
+		else
+			M.dropItemToGround(src)
+			to_chat(M, span_warning("\The [held] wriggles out of your grip!"))
+			to_chat(held, span_warning("You wiggle out of [M]'s grip!"))
 	else if(isitem(loc))
 		to_chat(held, span_warning("You struggle free of [loc]."))
 		forceMove(get_turf(src))
