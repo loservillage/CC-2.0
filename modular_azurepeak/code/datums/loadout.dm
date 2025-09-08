@@ -104,6 +104,10 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Worn Bamboo Hat"
 	path = /obj/item/clothing/head/roguetown/mentorhat/loadout
 
+/datum/loadout_item/grenzelhat
+	name = "Grenzelhoft Hat"
+	path = /obj/item/clothing/head/roguetown/grenzelhofthat/loadout
+
 //CLOAKS
 /datum/loadout_item/tabard
 	name = "Tabard"
