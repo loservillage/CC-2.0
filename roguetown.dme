@@ -2465,6 +2465,7 @@
 #include "modular_azurepeak\virtues\utility.dm"
 #include "modular_causticcove\code\modules\clothing\rogueclothes\armor.dm"
 #include "modular_causticcove\code\modules\roguetown\roguecrafting\sewing.dm"
+#include "modular_causticcove\code\modules\standardized_sprite\standardized_sprite_verb.dm"
 #include "modular_causticcove\code\modules\sizecats\prefs.dm"
 #include "modular_causticcove\code\modules\sizecats\sizecat_types.dm"
 #include "modular_causticcove\code\modules\sizecats\sizecats.dm"
