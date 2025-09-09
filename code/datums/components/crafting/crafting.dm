@@ -551,6 +551,7 @@
 	data["name"] = R.name
 	data["ref"] = "[REF(R)]"
 	data["path"] = R.type
+	data["sellprice"] = R.sellprice
 	var/req_text = ""
 	var/tool_text = ""
 	var/catalyst_text = ""
