@@ -480,6 +480,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	_load_virtue(S)
 	_load_flaw(S)
+	//Caustic edit!
+	_load_sizecat(S)
 
 	// LETHALSTONE edit: jank-ass load our statpack choice
 	_load_statpack(S)
@@ -738,8 +740,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	else
 		WRITE_FILE(S["loadout5"] , null)
 
+	//Caustic edits
 	save_vore_prefs(S)
-
+	save_sizecat(S)
+	//Caustic edits end
 	return TRUE
 
 
