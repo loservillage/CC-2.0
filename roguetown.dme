@@ -2474,6 +2474,7 @@
 #include "modular_causticcove\code\modules\micromacrointeractions\microholder.dm"
 #include "modular_causticcove\code\modules\micromacrointeractions\prefs.dm"
 #include "modular_causticcove\code\modules\micromacrointeractions\scoop.dm"
+#include "modular_causticcove\code\modules\nat_armor\nat_armor.dm"
 #include "modular_causticcove\code\modules\roguetown\roguecrafting\sewing.dm"
 #include "modular_causticcove\code\modules\sizecats\prefs.dm"
 #include "modular_causticcove\code\modules\sizecats\sizecat_types.dm"
