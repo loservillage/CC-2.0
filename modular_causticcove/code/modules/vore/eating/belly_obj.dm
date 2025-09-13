@@ -54,6 +54,8 @@
 	var/tmp/last_hearcheck = 0
 	var/tmp/list/hearing_mobs
 
+	var/datum/reagents/fluids_organ/forgan
+
 	// Don't forget to watch your commas at the end of each line if you change these.
 	var/list/struggle_messages_outside = list(
 		"%pred's %belly wobbles with a squirming meal.",
@@ -149,6 +151,7 @@
 		// "shrink_grow_size",
 /obj/belly/Initialize()
 	. = ..()
+	forgan = new /datum/reagents/fluids_organ(src)
 	take_ownership(src.loc)
 
 /obj/belly/proc/take_ownership(var/newloc)
@@ -157,6 +160,7 @@
 		owner = loc
 		owner.vore_organs |= src
 		SSbellies.belly_list += src
+		forgan.owner = loc
 
 /obj/belly/Destroy()
 	SSbellies.belly_list -= src

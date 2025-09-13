@@ -12,9 +12,9 @@
 	if(HAS_TRAIT(src, TRAIT_MACRO) || HAS_TRAIT(src, TRAIT_BIGGUY))
 		var/beeg = 0
 		if(HAS_TRAIT(src, TRAIT_MACRO))
-			beeg = 5
+			beeg = 6
 		if(HAS_TRAIT(src,TRAIT_BIGGUY))
-			beeg += 4
+			beeg += 4.5
 		return beeg
 	else
 		return 3
@@ -25,3 +25,13 @@
 	if(get_size() + 2 <= othersize)
 		return TRUE
 	return FALSE
+
+
+/mob/living/proc/getvolumemult()
+	return 1
+
+///Square cube law for tits, to be used for fluid production mainly. 1 is normal sized, and the smaller/bigger you get this gets exponentionally away from 1.
+/mob/living/carbon/human/getvolumemult()
+	//Square cube law for tits
+	var/ownersize = get_size()
+	return max_fluids * (ownersize * ownersize * ownersize) / 27)

@@ -21,6 +21,10 @@
 	var/play_sound //Potential sound to play at the end to avoid code duplication.
 	var/to_update = FALSE //Did anything update worthy happen?
 
+/////////////////////////// Liquid bits ///////////////////////////
+
+	forgan.bellytick()
+
 /////////////////////////// Auto-Emotes ///////////////////////////
 	if(contents.len && next_emote <= times_fired)
 		next_emote = times_fired + round(emote_time/wait,1)
