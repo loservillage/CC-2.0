@@ -2478,6 +2478,7 @@
 #include "modular_causticcove\code\modules\mob\dead\new_player\sprite_accessory\ears.dm"
 #include "modular_causticcove\code\modules\mob\dead\new_player\sprite_accessory\horns.dm"
 #include "modular_causticcove\code\modules\nat_armor\nat_armor.dm"
+#include "modular_causticcove\code\modules\new_religion_bits\eora_conjure_ingredients.dm"
 #include "modular_causticcove\code\modules\roguetown\roguecrafting\sewing.dm"
 #include "modular_causticcove\code\modules\sizecats\prefs.dm"
 #include "modular_causticcove\code\modules\sizecats\sizecat_types.dm"
